@@ -1,0 +1,77 @@
+{% extends "app1/base.html" %}
+
+
+
+{% block content %}
+
+<div class="container mt-5">
+ 
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+
+        {{Fm.as_p}} 
+        <div class="row">
+            <div class="col text-center">
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </div>
+
+          </div>
+
+      
+
+    </form>
+
+    <table class="table table-dark mt-4">
+        <thead>
+          <tr>
+            <th scope="col">Task No</th>
+            <th scope="col">Task</th>
+            <th scope="col">Status</th>
+            <th scope="col">Delete</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            
+
+            {% for task in taskshow %}
+              
+        
+
+
+
+          <tr>
+            <th scope="row">{{task.id}}</th>
+            <td>{{task.task}}</td>
+            <td>{{task.completed}}</td>
+            <td>
+
+            <form action="{% url 'del' task.id %}" method="post">
+                {% csrf_token %}
+
+                <input type="submit" class="btn btn-danger" value="Delete" >
+
+
+
+            </form>
+
+        </td>
+
+          
+          </tr>
+          {% endfor %}
+
+
+
+        </tbody>
+      </table>
+
+
+
+</div>
+
+{% endblock content %}
